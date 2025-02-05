@@ -3,129 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Auto MoneTag Ads</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>⚡ Hacking Offer ⚡</title>
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Space+Mono&display=swap" rel="stylesheet">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body {
-      background-color: #1a1a1a;
-      color: #fff;
-      text-align: center;
-      padding-top: 50px;
-    }
-    .card {
-      background-color: #2c2c2c;
-      border: none;
-      border-radius: 15px;
-      padding: 20px;
-      max-width: 400px;
-      margin: auto;
-    }
-    .btn-custom {
-      background-color: #28a745;
-      border: none;
-      color: #fff;
-      margin: 10px 0;
-      border-radius: 10px;
-    }
-    .progress-circle {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      border: 5px solid #28a745;
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #0e0e0e;
+      color: #00FF00;
+      font-family: 'Space Mono', monospace;
       display: flex;
-      align-items: center;
       justify-content: center;
-      margin: 20px auto;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.9);
+      padding: 40px 60px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #00FF00;
+      max-width: 600px;
+    }
+
+    h1 {
+      font-family: 'Russo One', sans-serif;
+      font-size: 3.5rem;
+      color: #00FF00;
+      text-shadow: 0 0 15px rgba(0, 255, 0, 0.9);
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #00FF00;
+      margin-bottom: 30px;
+    }
+
+    .btn-hacker {
+      background-color: #00FF00;
+      color: black;
+      font-size: 1.5rem;
+      padding: 15px 50px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-hacker:hover {
+      background-color: #00CC00;
+      transform: scale(1.05);
+    }
+
+    .countdown {
+      font-size: 2rem;
+      margin-top: 20px;
+      color: #FF0000;
+      font-weight: bold;
+      text-shadow: 0 0 5px rgba(255, 0, 0, 0.7);
     }
   </style>
 </head>
 <body>
 
-  <div class="card">
-    <h2>Auto MoneTag Ads</h2>
-    <p>Developer by Md Shajahan Abir</p>
-    <h5>Welcome, @exampleUser</h5>
-    <p>Watched Ads: <span id="watchedAds">0</span></p>
-    <p>Earned Points: <span id="earnedPoints">0</span></p>
-
-    <div class="progress-circle">
-      <h4 id="progressText">0%</h4>
-    </div>
-
-    <button class="btn btn-custom w-100" id="watchAdBtn">Watch Ad</button>
-    <button class="btn btn-custom w-100" id="autoShowAdsBtn">Auto Show Ads</button>
-    <button class="btn btn-custom w-100" id="stopAutoAdsBtn">Stop Auto Ads</button>
+  <div class="container">
+    <h1>⚡ Hacking Offer Unlocked ⚡</h1>
+    <p>Complete the task to reveal an exclusive offer. Hurry, time is running out!</p>
+    <a href="https://www.profitablecpmrate.com/cdcd1yirp?key=a45619e88f2fc7edc1e72f5e3ff7505f" class="btn btn-hacker">Get Offer</a>
+    <div class="countdown" id="countdown">00:00:30</div>
   </div>
 
   <script>
-    let watchedAds = 0;
-    let earnedPoints = 0;
-    let autoAdsInterval = null;
-    let adWindow = null;
-    let userIsOnMainPage = true; // Check if the user is still on the main page
-
-    // Watch Ad Button
-    document.getElementById("watchAdBtn").addEventListener("click", function() {
-      openAd(false);
-    });
-
-    // Auto Show Ads Button
-    document.getElementById("autoShowAdsBtn").addEventListener("click", function() {
-      autoAdsInterval = setInterval(function() {
-        openAd(true); // Open ads automatically
-      }, 25000); // Open a new ad after 25 seconds
-    });
-
-    // Stop Auto Ads Button
-    document.getElementById("stopAutoAdsBtn").addEventListener("click", function() {
-      clearInterval(autoAdsInterval);
-    });
-
-    function openAd(auto = false) {
-      adWindow = window.open("https://example.com", "_blank");
-
-      let progressText = document.getElementById("progressText");
-      let time = 20; // 20 seconds
-      let interval = setInterval(function() {
-        if (!userIsOnMainPage) {
-          clearInterval(interval);
-          progressText.textContent = "⚠️";
-          alert("Warning ⚠️: Ad must be watched to earn points!");
-          adWindow.close();
-          return;
-        }
-
-        time--;
-        progressText.textContent = (20 - time) * 5 + "%"; // Progress in percentage
-
-        if (time <= 0) {
-          clearInterval(interval);
-          adWindow.close(); // Close the ad tab after 20 seconds
-          progressText.textContent = "100%";
-
-          // Update watched ads and earned points
-          watchedAds++;
-          earnedPoints += 0.40;
-
-          document.getElementById("watchedAds").textContent = watchedAds;
-          document.getElementById("earnedPoints").textContent = earnedPoints.toFixed(2); // Two decimal points
-
-          if (!auto) alert("Ad watched successfully!");
-        }
-      }, 1000);
-    }
-
-    // Page visibility API to check if the user switches tabs
-    document.addEventListener("visibilitychange", function() {
-      if (document.hidden) {
-        userIsOnMainPage = false; // User left the main page
+    // Countdown Timer
+    var timeleft = 30;
+    var countdownTimer = setInterval(function() {
+      if (timeleft <= 0) {
+        clearInterval(countdownTimer);
+        document.getElementById("countdown").innerHTML = "Offer Expired";
       } else {
-        userIsOnMainPage = true; // User returned to the main page
+        document.getElementById("countdown").innerHTML = "00:00:" + (timeleft < 10 ? "0" + timeleft : timeleft);
       }
-    });
-
+      timeleft -= 1;
+    }, 1000);
   </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
